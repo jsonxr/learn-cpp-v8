@@ -1,16 +1,18 @@
 # Embed v8 on Mac silicon
 
-Note: Might complain about XCode, so make sure it's installed and pointed to the xcode instead of the command line tools.
 
 1) XCode
 
     ```shell
     # Command Line Tools. Although, v8 seems to complain if not using xcode
     # xcode-select --install
-    # sudo xcode-select --switch /Library/Developer/CommandLineTools # Enable command line tools
+    # sudo xcode-select --switch /Library/Developer/CommandLineTools
 
     sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
     ```
+
+Note: Might complain about XCode, so make sure it's installed and pointed to the xcode instead of the command line tools.
+
 
 2) Install depot tools
 
@@ -19,7 +21,8 @@ Note: Might complain about XCode, so make sure it's installed and pointed to the
     cd $HOME/v8
     git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
-    # Add depot_tools to the front of your PATH (you will probably want to put this in your ~/.bashrc or ~/.zshrc). Assuming you cloned depot_tools to /path/to/depot_tools:
+    # Add depot_tools to the front of your PATH (you will probably want to put
+    # this in your ~/.bashrc or ~/.zshrc).
     # .zprofile
     export PATH=$HOME/v8/depot_tools:$PATH
     export V8_HOME=$HOME/v8/v8
@@ -47,7 +50,15 @@ Note: Might complain about XCode, so make sure it's installed and pointed to the
 
     ```shell
     cp $V8_HOME/out.gn/$V8_RELEASE.sample/icudtl.dat .
-    g++ -I$V8_HOME/include -I. -Iinclude hello-world.cc -o hello_world -lv8_monolith -L$V8_HOME/out.gn/$V8_RELEASE.sample/obj/ -pthread -std=c++14 -DV8_COMPRESS_POINTERS
+    g++ \
+        -I$V8_HOME/include \
+        -I. \
+        -Iinclude hello-world.cc \
+        -std=c++14 \
+        -o hello_world \
+        -lv8_monolith -L$V8_HOME/out.gn/$V8_RELEASE.sample/obj/ \
+        -pthread \
+        -DV8_COMPRESS_POINTERS
     ```
 
 # References
