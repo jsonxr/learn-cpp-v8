@@ -1,0 +1,1 @@
+g++ -I. -Iinclude samples/hello-world.cc -o hello_world -lv8_monolith -Lout.gn/arm64.release.sample/obj/ -pthread -std=c++14 -DV8_COMPRESS_POINTERS
